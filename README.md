@@ -1,96 +1,63 @@
 # Regulex-Plus
 
-Regulex-Plus is a maintained fork of Regulex, a JavaScript regular expression parser and visualizer.
+中文 | [EN](README.en.md)
 
-## Project Status
+## 项目简介
 
-This fork focuses on practical fixes for a legacy front-end bundle workflow.
+Regulex-Plus 是 Regulex 的维护分支，用于正则表达式解析与可视化（railroad 风格图）。
 
-## Recent Optimizations
+### 项目状态
 
-### 1. Printable Unicode / Chinese Display
+该分支聚焦于对遗留前端打包产物的实用修复与兼容性改进。
 
-Problem:
-- Diagram labels rendered Chinese and other printable Unicode characters as escaped sequences like `\u4F60\u597D`.
+### 最近优化
 
-Fix:
-- Added a runtime override for `Kit.toPrint` in `docs/index.html`.
-- Keep printable Unicode characters as-is.
-- Continue escaping unsafe characters:
-  - C0/C1 controls (`0x00-0x1F`, `0x7F-0x9F`)
-  - line separators (`0x2028`, `0x2029`)
-  - zero-width/invisible chars (`0x200B`, `0x200C`, `0x200D`, `0xFEFF`)
-  - isolated surrogate code units (`0xD800-0xDFFF`)
+#### 1. 中文/Unicode 显示优化
 
-Result:
-- Chinese text is rendered directly in graph labels.
+问题：
+- 图中标签会把中文等可打印 Unicode 字符显示成转义序列（例如 `\u4F60\u597D`）。
 
-### 2. Mixed CJK Width Layout Fix
+修复：
+- 在 `docs/index.html` 中对 `Kit.toPrint` 进行运行时覆盖。
+- 保持可打印 Unicode 原样显示。
+- 仍然转义不安全字符：
+  - C0/C1 控制字符（`0x00-0x1F`, `0x7F-0x9F`）
+  - 行分隔符（`0x2028`, `0x2029`）
+  - 零宽/不可见字符（`0x200B`, `0x200C`, `0x200D`, `0xFEFF`）
+  - 非法代理项（`0xD800-0xDFFF`）
 
-Problem:
-- After enabling direct Chinese rendering, some header/label text in the graph became visually compressed or overlapped.
+结果：
+- 图中中文直接显示，不再出现 Unicode 转义。
 
-Fix:
-- Added Unicode-aware width calculation in the bundled `visualize` logic in `docs/index.html`.
-- Replaced affected `.length`-based width calculations with code-point-aware visual width estimation.
+#### 2. 中英混排布局宽度修复
 
-Result:
-- Layout spacing is stable for mixed ASCII + Chinese content.
+问题：
+- 开启中文原样显示后，顶部 `RegExp:` 标题与部分标签出现挤压或重叠。
 
-## Quick Start
+修复：
+- 在内联 `visualize` 逻辑中加入 Unicode 宽度估算。
+- 把基于 `.length` 的宽度计算替换为按字符宽度估算的逻辑。
 
-### Run Locally
+结果：
+- 混合 ASCII + 中文的文本间距稳定。
 
-Open `docs/index.html` in a browser, or serve the repo root as static files.
+### 快速开始
 
-### Example Regex
+#### 本地运行
+
+直接用浏览器打开 `docs/index.html`，或用静态服务器启动仓库根目录。
+
+#### 示例正则
 
 - `^(a|你好)*?$`
 - `[汉字]+`
 
-## Install (Node.js)
+### 仓库结构
 
-```bash
-npm install regulex
-```
+- `docs/index.html`: 单文件运行时（主要目标）
+- `src/`: TypeScript 源码
+- `test/`: 测试与基准
 
-## API (Legacy)
-
-### Parse to AST
-
-```javascript
-var parse = require("regulex").parse;
-var re = /var\s+([a-zA-Z_]\w*);/;
-console.log(parse(re.source));
-```
-
-### Visualize
-
-```javascript
-var parse = require("regulex").parse;
-var visualize = require("regulex").visualize;
-var Raphael = require("regulex").Raphael;
-
-var re = /var\s+([a-zA-Z_]\w*);/;
-var paper = Raphael("yourSvgContainerId", 0, 0);
-
-try {
-  visualize(parse(re.source), getRegexFlags(re), paper);
-} catch (e) {
-  if (e instanceof parse.RegexSyntaxError) {
-    logError(re, e);
-  } else {
-    throw e;
-  }
-}
-```
-
-## Repository Layout
-
-- `docs/index.html`: deployed single-file runtime bundle
-- `src/`: TypeScript source code
-- `test/`: tests and benchmarks
-
-## License
+### 许可证
 
 MIT
