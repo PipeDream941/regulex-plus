@@ -1,10 +1,10 @@
-# Regulex-Plus
+# RegulexPlus
 
 [中文](README.md) | EN
 
 > JavaScript regular-expression parser & visualizer — modernized UI, native CJK support, railroad-style diagrams.
 
-**🌐 Live demo: <https://pipedream941.github.io/Regulex-Plus/>**
+**🌐 Live demo: <https://pipedream941.github.io/RegulexPlus/>**
 
 No install, no backend — just open it in a browser.
 
@@ -20,15 +20,15 @@ No install, no backend — just open it in a browser.
 
 ## Try it
 
-Open the live demo: <https://pipedream941.github.io/Regulex-Plus/>
+Open the live demo: <https://pipedream941.github.io/RegulexPlus/>
 
 Click a chip at the top to load a preset: `email` · `phone` · `url` · `iso-date` · a long Chinese in-car navigation regex.
 
 ## Run Locally
 
 ```bash
-git clone https://github.com/PipeDream941/Regulex-Plus.git
-cd Regulex-Plus
+git clone https://github.com/PipeDream941/RegulexPlus.git
+cd RegulexPlus
 python -m http.server -d docs 8000
 # open http://localhost:8000
 ```
@@ -45,7 +45,7 @@ You can also open `docs/index.html` directly, but a static server is recommended
 
 ## Credits
 
-Forked from [CJex/regulex](https://github.com/CJex/regulex) (original author jex.im). Regulex-Plus adds UI modernization, CJK rendering fixes, working PNG export, i18n, and more.
+Forked from [CJex/regulex](https://github.com/CJex/regulex) (original author jex.im). RegulexPlus adds UI modernization, CJK rendering fixes, working PNG export, i18n, and more.
 
 ## License
 

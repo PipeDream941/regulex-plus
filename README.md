@@ -1,10 +1,10 @@
-# Regulex-Plus
+# RegulexPlus
 
 中文 | [EN](README.en.md)
 
 > JavaScript 正则表达式解析与可视化工具 —— 现代化界面、原生中文支持、railroad 风格图
 
-**🌐 在线试用：<https://pipedream941.github.io/Regulex-Plus/>**
+**🌐 在线试用：<https://pipedream941.github.io/RegulexPlus/>**
 
 无需安装、零后端，浏览器打开即用。
 
@@ -20,15 +20,15 @@
 
 ## 快速试用
 
-直接打开线上 demo：<https://pipedream941.github.io/Regulex-Plus/>
+直接打开线上 demo：<https://pipedream941.github.io/RegulexPlus/>
 
 页面顶部 chip 一键加载示例：`email` · `phone` · `url` · `iso-date` · 中文车机导航长正则。
 
 ## 本地运行
 
 ```bash
-git clone https://github.com/PipeDream941/Regulex-Plus.git
-cd Regulex-Plus
+git clone https://github.com/PipeDream941/RegulexPlus.git
+cd RegulexPlus
 python -m http.server -d docs 8000
 # 浏览器访问 http://localhost:8000
 ```
@@ -45,7 +45,7 @@ python -m http.server -d docs 8000
 
 ## 致谢
 
-本项目 Fork 自 [CJex/regulex](https://github.com/CJex/regulex)（原作者 jex.im）。Regulex-Plus 在原项目基础上做了 UI 现代化、中文渲染修复、PNG 导出修复、i18n 等改进。
+本项目 Fork 自 [CJex/regulex](https://github.com/CJex/regulex)（原作者 jex.im）。RegulexPlus 在原项目基础上做了 UI 现代化、中文渲染修复、PNG 导出修复、i18n 等改进。
 
 ## 许可证
 
