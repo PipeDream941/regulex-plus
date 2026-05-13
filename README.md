@@ -2,140 +2,51 @@
 
 中文 | [EN](README.en.md)
 
-## 项目简介
+> JavaScript 正则表达式解析与可视化工具 —— 现代化界面、原生中文支持、railroad 风格图
 
-Regulex-Plus 是 Regulex 的维护分支，用于正则表达式解析与可视化（railroad 风格图）。
+**🌐 在线试用：<https://pipedream941.github.io/Regulex-Plus/>**
 
-### 项目状态
+无需安装、零后端，浏览器打开即用。
 
-该分支聚焦于对遗留前端打包产物的实用修复与兼容性改进。
+## 特性
 
-### 最近优化
+- 🎨 **现代化 UI** —— 暗 / 亮双主题，DM Sans + JetBrains Mono，Tweaks 面板可调强调色与画布底色
+- 🌏 **中英双语** —— 一键切换，所有 UI、提示、示例完整本地化
+- 📐 **圆角 SVG 节点** —— 重做 Begin / End、量词、字符类节点的配色与圆角
+- 🈯 **原生 Unicode / 中文** —— 图标签直接显示中文，不再渲染成 `你好` 转义
+- 📏 **中英混排宽度修复** —— `visualize` 内部按字符可视宽度计算，避免标题挤压
+- 🖼 **PNG 图片导出** —— 颜色与圆角内联到 SVG，2× DPR 高清下载
+- 📦 **零后端依赖** —— 单文件 HTML，可通过 `<iframe>` 嵌入到任意页面
 
-#### 1. 中文/Unicode 显示优化
+## 快速试用
 
-问题：
-- 图中标签会把中文等可打印 Unicode 字符显示成转义序列（例如 `\u4F60\u597D`）。
+直接打开线上 demo：<https://pipedream941.github.io/Regulex-Plus/>
 
-修复：
-- 在 `docs/index.html` 中对 `Kit.toPrint` 进行运行时覆盖。
-- 保持可打印 Unicode 原样显示。
-- 仍然转义不安全字符：
-  - C0/C1 控制字符（`0x00-0x1F`, `0x7F-0x9F`）
-  - 行分隔符（`0x2028`, `0x2029`）
-  - 零宽/不可见字符（`0x200B`, `0x200C`, `0x200D`, `0xFEFF`）
-  - 非法代理项（`0xD800-0xDFFF`）
+页面顶部 chip 一键加载示例：`email` · `phone` · `url` · `iso-date` · 中文车机导航长正则。
 
-结果：
-- 图中中文直接显示，不再出现 Unicode 转义。
-
-#### 2. 中英混排布局宽度修复
-
-问题：
-- 开启中文原样显示后，顶部 `RegExp:` 标题与部分标签出现挤压或重叠。
-
-修复：
-- 在内联 `visualize` 逻辑中加入 Unicode 宽度估算。
-- 把基于 `.length` 的宽度计算替换为按字符宽度估算的逻辑。
-
-结果：
-- 混合 ASCII + 中文的文本间距稳定。
-
-### 快速开始
-
-#### 本地运行
-
-直接用浏览器打开 `docs/index.html`，或用静态服务器启动仓库根目录。
-
-#### 示例正则
-
-- `^(a|你好)*?$`
-- `[汉字]+`
-
-### 仓库结构
-
-- `docs/index.html`: 单文件运行时（主要目标）
-- `src/`: TypeScript 源码
-- `test/`: 测试与基准
-
-### 许可证
-
-MIT
-
-## 原始 Regulex README（保留）
-
-Regulex
-Regulex is a JavaScript Regular Expression Parser & Visualizer.
-
-Try it now: https://jex.im/regulex/
-
-This project is under reconstruction!
-
-### Features
-
-- Written in pure JavaScript. No backend required.
-- You can embed the graph on you own site through HTML iframe element.
-- Detailed error message. In most cases it can point out the precise syntax error position.
-- No support for octal escape. Yes it is a feature! ECMAScript strict mode doesn't allow octal escape in string, but many browsers still allow octal escape in regex. In regulex, DecimalEscape will always be treated as back reference. If the back reference is invalid, e.g. `/\1/`, `/(\1)/`, `/(a)\2/`, or DecimalEscape appears in charset（because in this case it can't be explained as back reference, e.g. `/(ab)[\1]/`, Regulex will always throw an error.
-
-### Install for Node.js
+## 本地运行
 
 ```bash
-npm install regulex
+git clone https://github.com/PipeDream941/Regulex-Plus.git
+cd Regulex-Plus
+python -m http.server -d docs 8000
+# 浏览器访问 http://localhost:8000
 ```
 
-### Local Build for Browser
+或者直接用浏览器打开 `docs/index.html`（部分浏览器对 `file://` 下的 SVG 行为不同，建议走静态服务器）。
 
-This command will generate bundle `dist/regulex.js` for browser side:
+## 仓库结构
 
-```bash
-git checkout legacy
-npm install -g requirejs
-r.js -o build-config.js
-```
+| 路径 | 说明 |
+| --- | --- |
+| `docs/index.html` | 部署入口；GitHub Pages 来源 |
+| `src/` | TypeScript 源码 |
+| `test/` | 测试与基准 |
 
-### API
+## 致谢
 
-Parse to AST
+本项目 Fork 自 [CJex/regulex](https://github.com/CJex/regulex)（原作者 jex.im）。Regulex-Plus 在原项目基础上做了 UI 现代化、中文渲染修复、PNG 导出修复、i18n 等改进。
 
-```js
-var parse = require("regulex").parse;
-var re = /var\s+([a-zA-Z_]\w*);/ ;
-console.log(parse(re.source));
-```
+## 许可证
 
-Visualize
-
-```js
-var parse = require("regulex").parse;
-var visualize = require("regulex").visualize;
-var Raphael = require('regulex').Raphael;
-var re = /var\s+([a-zA-Z_]\w*);/;
-var paper = Raphael("yourSvgContainerId", 0, 0);
-try {
-  visualize(parse(re.source), getRegexFlags(re), paper);
-} catch(e) {
-  if (e instanceof parse.RegexSyntaxError) {
-    logError(re, e);
-  } else {
-    throw e;
-  }
-}
-
-function logError(re, err) {
-  var msg = ["Error:" + err.message, ""];
-  if (typeof err.lastIndex === "number") {
-    msg.push(re);
-    msg.push(new Array(err.lastIndex).join("-") + "^");
-  }
-  console.log(msg.join("\n"));
-}
-
-function getRegexFlags(re) {
-  var flags = "";
-  flags += re.ignoreCase ? "i" : "";
-  flags += re.global ? "g" : "";
-  flags += re.multiline ? "m" : "";
-  return flags;
-}
-```
+[MIT](LICENSE)
