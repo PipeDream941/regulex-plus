@@ -8,3 +8,7 @@ test/log/
 *.code-workspace
 *.swp
 docs/beta.html
+
+# `npx skills add` artifacts (skill is self-published from this repo)
+.agents/
+skills-lock.json
