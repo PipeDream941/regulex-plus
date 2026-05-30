@@ -1,37 +1,56 @@
 {
-  "name": "regulex",
-  "version": "1.0.0",
-  "description": "Regular Expression Excited!",
+  "name": "regulex-plus",
+  "version": "1.1.0",
+  "description": "JavaScript regex visualizer with native CJK support and Node CLI. Produces railroad-style SVG/PNG diagrams of any regular expression.",
   "author": {
-    "name": "Jex",
-    "email": "i@jex.im",
-    "url": "https://jex.im/"
+    "name": "PipeDream941"
   },
-  "main": "./build/src/index",
+  "contributors": [
+    {
+      "name": "Jex",
+      "url": "https://jex.im/",
+      "email": "i@jex.im"
+    }
+  ],
+  "bin": {
+    "regulex-plus": "./bin/regulex-plus.mjs"
+  },
   "files": [
-    "build",
+    "bin",
+    "docs",
     "src",
-    "test"
+    "README.md",
+    "README.en.md",
+    "SKILL.md",
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/CJex/regulex.git"
+    "url": "https://github.com/PipeDream941/regulex-plus.git"
+  },
+  "homepage": "https://pipedream941.github.io/regulex-plus/",
+  "bugs": {
+    "url": "https://github.com/PipeDream941/regulex-plus/issues"
   },
   "keywords": [
-    "Regular Expression",
-    "RegExp",
-    "Regex",
-    "XRegExp",
-    "PCRE",
-    "Parser",
-    "Regulex"
+    "regex",
+    "regexp",
+    "regular-expression",
+    "visualizer",
+    "railroad",
+    "svg",
+    "diagram",
+    "claude-skill",
+    "cjk",
+    "chinese",
+    "cli"
   ],
   "license": "MIT",
   "engines": {
-    "node": ">=12.1"
+    "node": ">=18"
   },
   "dependencies": {
-    "core-js": "^2.5.7"
+    "playwright": "^1.48.0"
   },
   "devDependencies": {
     "@types/benchmark": "^1.0.31",
@@ -48,12 +67,12 @@
     "acorn": "^6.1.0",
     "benchmark": "^2.1.4",
     "chai": "^4.2.0",
+    "core-js": "^2.5.7",
     "css-loader": "^3.0.0",
     "fast-check": "^1.16.0",
     "html-inline-css-webpack-plugin": "^1.6.0",
     "html-webpack-inline-source-plugin": "0.0.10",
     "html-webpack-plugin": "^3.2.0",
-    "husky": "^1.3.1",
     "immer": "^3.2.0",
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.7.0",
@@ -80,11 +99,7 @@
     "testit": "mocha --inline-diffs --require ts-node/register",
     "format": "prettier --write \"{src,test}/**/*.{js,ts,css}\" \"./*.{js,ts,css}\"",
     "buildUnicode": "ts-node src/tools/buildUnicode.ts && npm run format && npm run build",
-    "prepare": "npm run build"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run build"
-    }
+    "cli:install-browser": "playwright install chromium",
+    "cli": "node bin/regulex-plus.mjs"
   }
 }
