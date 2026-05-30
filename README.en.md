@@ -47,6 +47,10 @@ npx regulex-plus '^(a|b)*?$'
 npx regulex-plus '中文(标点|符号)+' --out diagrams/cjk.png
 npx regulex-plus '\d{3}-\d{4}' --format svg --out phone.svg
 
+# Emit a Mermaid flowchart (text, paste into GitHub / Notion / Obsidian)
+npx regulex-plus '^(a|b)*?$' --format mermaid -o flow.mmd
+npx regulex-plus '^(?:\d{3}-)?\d{3,4}-\d{4}$' --format mermaid --direction TD -o phone.mmd
+
 # Dark theme, English labels, 2× DPR
 npx regulex-plus '(?:abc|def)+' --theme dark --lang en --scale 2 --out demo.png
 
@@ -54,7 +58,7 @@ npx regulex-plus '(?:abc|def)+' --theme dark --lang en --scale 2 --out demo.png
 npx regulex-plus --help
 ```
 
-First run downloads Chromium (~92MB). If it fails, run `npx playwright install chromium` manually.
+**Format selection**: `png` / `svg` drive a headless Chromium (~92MB downloaded on first run); `mermaid` is pure text output — **no Chromium needed, 5× faster to start**. Output extension is auto-detected: `.mmd` → mermaid, `.svg` → svg, anything else → png.
 
 ### Install as a Skill
 

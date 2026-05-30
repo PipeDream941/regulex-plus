@@ -47,6 +47,10 @@ npx regulex-plus '^(a|b)*?$'
 npx regulex-plus '中文(标点|符号)+' --out diagrams/cjk.png
 npx regulex-plus '\d{3}-\d{4}' --format svg --out phone.svg
 
+# 输出 Mermaid 流程图（文本格式，可直接贴到 GitHub / Notion / Obsidian）
+npx regulex-plus '^(a|b)*?$' --format mermaid -o flow.mmd
+npx regulex-plus '^(?:\d{3}-)?\d{3,4}-\d{4}$' --format mermaid --direction TD -o phone.mmd
+
 # 暗色主题、英文标签、2× DPR
 npx regulex-plus '(?:abc|def)+' --theme dark --lang en --scale 2 --out demo.png
 
@@ -54,7 +58,7 @@ npx regulex-plus '(?:abc|def)+' --theme dark --lang en --scale 2 --out demo.png
 npx regulex-plus --help
 ```
 
-首次运行会下载 Chromium（~92MB）；如果失败手动跑 `npx playwright install chromium`。
+**格式选择**：`png` / `svg` 走 headless Chromium（首次运行下载 ~92MB），`mermaid` 是纯文本输出，**不需要 Chromium、启动快 5× 以上**。后缀自动识别：`.mmd` → mermaid，`.svg` → svg，其余默认 png。
 
 ### 作为 Skill 安装
 

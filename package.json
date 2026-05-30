@@ -1,7 +1,7 @@
 {
   "name": "regulex-plus",
-  "version": "1.1.0",
-  "description": "JavaScript regex visualizer with native CJK support and Node CLI. Produces railroad-style SVG/PNG diagrams of any regular expression.",
+  "version": "1.2.0",
+  "description": "JavaScript regex visualizer with native CJK support and Node CLI. Produces railroad-style PNG/SVG diagrams or Mermaid flowcharts of any regular expression.",
   "author": {
     "name": "PipeDream941"
   },
@@ -42,14 +42,17 @@
     "claude-skill",
     "cjk",
     "chinese",
-    "cli"
+    "cli",
+    "mermaid",
+    "flowchart"
   ],
   "license": "MIT",
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
-    "playwright": "^1.48.0"
+    "playwright": "^1.48.0",
+    "regex-to-mermaid": "^2.0.0"
   },
   "devDependencies": {
     "@types/benchmark": "^1.0.31",
