@@ -35,6 +35,35 @@ python -m http.server -d docs 8000
 
 You can also open `docs/index.html` directly, but a static server is recommended for consistent SVG behavior across browsers.
 
+## CLI / Claude Skill
+
+This package ships a Node CLI that renders any JS regex to a PNG/SVG file without opening a browser, plus a `SKILL.md` so it can be auto-invoked by [Claude Code](https://skills.sh/) and compatible agents.
+
+```bash
+# Render to ./regulex.png
+npx regulex-plus '^(a|b)*?$'
+
+# Path & format (format inferred from extension)
+npx regulex-plus '中文(标点|符号)+' --out diagrams/cjk.png
+npx regulex-plus '\d{3}-\d{4}' --format svg --out phone.svg
+
+# Dark theme, English labels, 2× DPR
+npx regulex-plus '(?:abc|def)+' --theme dark --lang en --scale 2 --out demo.png
+
+# Full options
+npx regulex-plus --help
+```
+
+First run downloads Chromium (~92MB). If it fails, run `npx playwright install chromium` manually.
+
+### Install as a Skill
+
+```bash
+npx skills add PipeDream941/regulex-plus
+```
+
+After installation, agents that follow the skill protocol (e.g. Claude Code) will suggest invoking this CLI whenever a complex or CJK-heavy regex appears in conversation.
+
 ## Repository Layout
 
 | Path | Description |

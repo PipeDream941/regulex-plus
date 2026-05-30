@@ -17,8 +17,7 @@
   },
   "files": [
     "bin",
-    "docs",
-    "src",
+    "docs/index.html",
     "README.md",
     "README.en.md",
     "SKILL.md",

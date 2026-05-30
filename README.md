@@ -35,6 +35,35 @@ python -m http.server -d docs 8000
 
 或者直接用浏览器打开 `docs/index.html`（部分浏览器对 `file://` 下的 SVG 行为不同，建议走静态服务器）。
 
+## 命令行用法 / Claude Skill
+
+通过 npm 安装后，可以在终端直接把任意 JS 正则渲染成 PNG/SVG 文件——无需打开浏览器。同时本仓库带有 `SKILL.md`，可作为 [Claude Code Skill](https://skills.sh/) 被 AI agent 自动调用。
+
+```bash
+# 最简单：渲染到 ./regulex.png
+npx regulex-plus '^(a|b)*?$'
+
+# 指定输出路径与格式（根据后缀自动判断）
+npx regulex-plus '中文(标点|符号)+' --out diagrams/cjk.png
+npx regulex-plus '\d{3}-\d{4}' --format svg --out phone.svg
+
+# 暗色主题、英文标签、2× DPR
+npx regulex-plus '(?:abc|def)+' --theme dark --lang en --scale 2 --out demo.png
+
+# 完整选项
+npx regulex-plus --help
+```
+
+首次运行会下载 Chromium（~92MB）；如果失败手动跑 `npx playwright install chromium`。
+
+### 作为 Skill 安装
+
+```bash
+npx skills add PipeDream941/regulex-plus
+```
+
+之后任何兼容 skills 协议的 agent（如 Claude Code）在用户讨论复杂正则时会自动建议调用本 CLI 生成可视化。
+
 ## 仓库结构
 
 | 路径 | 说明 |
